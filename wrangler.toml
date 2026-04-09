@@ -1,6 +1,7 @@
 # Cloudflare Worker + Assets deployment for AI Sales Advisor
 # Serves the app at edmund.link/srkk-eonchemicals
 name = "srkk-eonchemical-ai-sales-advisor"
+main = "src/worker.ts"
 compatibility_date = "2024-12-10"
 workers_dev = false
 
@@ -13,5 +14,7 @@ pattern = "edmund.link/srkk-eonchemicals/*"
 zone_name = "edmund.link"
 
 [assets]
-directory = "./build/srkk-eonchemicals"
-not_found_handling = "single-page-application"
+directory = "./build"
+binding = "ASSETS"
+run_worker_first = true
+not_found_handling = "404-page"
