@@ -1,8 +1,18 @@
+$schema = "./node_modules/wrangler/config-schema.json"
+
 # Cloudflare Worker + Assets deployment for AI Sales Advisor
 # Serves the app at edmund.link/srkk-eonchemicals
 name = "srkk-eonchemical-ai-sales-advisor"
 compatibility_date = "2024-12-10"
-route = "edmund.link/srkk-eonchemicals*"
+workers_dev = false
+
+[[routes]]
+pattern = "edmund.link/srkk-eonchemicals"
+zone_name = "edmund.link"
+
+[[routes]]
+pattern = "edmund.link/srkk-eonchemicals/*"
+zone_name = "edmund.link"
 
 [assets]
 directory = "./build"
