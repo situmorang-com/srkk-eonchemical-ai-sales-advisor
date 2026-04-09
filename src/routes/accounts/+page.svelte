@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import type { PageData } from './$types';
 	import RiskBadge from '$lib/components/ui/RiskBadge.svelte';
 	import type { AccountSummary } from '$lib/types';
@@ -84,7 +85,7 @@
 				{#each filtered as account}
 				<tr class="border-b border-gray-50 hover:bg-gray-50 transition-colors">
 					<td class="px-6 py-3.5">
-						<a href="/accounts/{account.id}" class="font-semibold text-brand-700 hover:underline">{account.name}</a>
+						<a href="{base}/accounts/{account.id}" class="font-semibold text-brand-700 hover:underline">{account.name}</a>
 						<p class="text-xs text-gray-400 mt-0.5">{account.city ?? ''}{account.state ? `, ${account.state}` : ''}</p>
 					</td>
 					<td class="px-6 py-3.5 text-gray-600">{account.industryName}</td>

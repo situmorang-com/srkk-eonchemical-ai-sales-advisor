@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import RiskBadge from './RiskBadge.svelte';
 	import StalledBadge from './StalledBadge.svelte';
 	import type { OpportunitySummary } from '$lib/types';
@@ -21,7 +22,7 @@
 	};
 </script>
 
-<a href="/opportunities/{opp.id}" class="block sm:flex sm:items-center gap-4 px-4 sm:px-6 py-3 sm:py-4 hover:bg-gray-50 transition-colors border-b border-gray-50 last:border-0 group">
+<a href="{base}/opportunities/{opp.id}" class="block sm:flex sm:items-center gap-4 px-4 sm:px-6 py-3 sm:py-4 hover:bg-gray-50 transition-colors border-b border-gray-50 last:border-0 group">
 	<div class="min-w-0 flex-1">
 		<div class="flex items-center gap-2">
 			<p class="text-sm font-semibold text-gray-900 truncate group-hover:text-brand-700">{opp.name}</p>

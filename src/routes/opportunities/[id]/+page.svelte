@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import type { PageData } from './$types';
 	import RiskBadge from '$lib/components/ui/RiskBadge.svelte';
 	import StalledBadge from '$lib/components/ui/StalledBadge.svelte';
@@ -41,7 +42,7 @@
 			<div class="flex items-center gap-2 mb-2 text-sm text-gray-400">
 				<a href="/opportunities" class="hover:text-gray-600">← Opportunities</a>
 				<span>·</span>
-				<a href="/accounts/{opp.accountId}" class="hover:text-brand-600">{opp.accountName}</a>
+				<a href="{base}/accounts/{opp.accountId}" class="hover:text-brand-600">{opp.accountName}</a>
 			</div>
 			<h1 class="text-2xl font-bold text-gray-900">{opp.name}</h1>
 			<div class="flex items-center gap-3 mt-2 flex-wrap">
@@ -188,7 +189,7 @@
 			<div class="card-body space-y-3 text-sm">
 				<div class="flex justify-between">
 					<span class="text-gray-500">Account</span>
-					<a href="/accounts/{opp.accountId}" class="text-brand-600 hover:underline font-medium">{opp.accountName}</a>
+					<a href="{base}/accounts/{opp.accountId}" class="text-brand-600 hover:underline font-medium">{opp.accountName}</a>
 				</div>
 				<div class="flex justify-between">
 					<span class="text-gray-500">Industry</span>

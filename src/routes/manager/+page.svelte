@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import type { PageData } from './$types';
 	import RiskBadge from '$lib/components/ui/RiskBadge.svelte';
 	import MiniBarChart from '$lib/components/ui/MiniBarChart.svelte';
@@ -127,7 +128,7 @@
 			<div class="px-6 py-4 flex items-start gap-4">
 				<div class="min-w-0 flex-1">
 					<div class="flex items-center gap-2 flex-wrap">
-						<a href="/opportunities/{deal.opportunityId}" class="text-sm font-semibold text-brand-700 hover:underline">{deal.opportunityName}</a>
+						<a href="{base}/opportunities/{deal.opportunityId}" class="text-sm font-semibold text-brand-700 hover:underline">{deal.opportunityName}</a>
 						<span class="badge {deal.stalledDays > 21 ? 'badge-red' : 'badge-yellow'}">{deal.stalledDays}d stalled</span>
 						<RiskBadge risk={deal.riskLevel} />
 					</div>
@@ -160,7 +161,7 @@
 					{#each topAccounts as acc}
 					<tr class="border-b border-gray-50 hover:bg-gray-50">
 						<td class="px-6 py-3">
-							<a href="/accounts/{acc.id}" class="font-semibold text-brand-700 hover:underline">{acc.name}</a>
+							<a href="{base}/accounts/{acc.id}" class="font-semibold text-brand-700 hover:underline">{acc.name}</a>
 						</td>
 						<td class="px-6 py-3 text-gray-500">{acc.industryName}</td>
 						<td class="px-6 py-3 capitalize text-gray-600">{acc.tier}</td>

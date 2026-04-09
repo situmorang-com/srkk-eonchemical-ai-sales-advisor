@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import type { PageData } from './$types';
 	import OpportunityRow from '$lib/components/ui/OpportunityRow.svelte';
 
@@ -29,7 +30,7 @@
 	<div class="flex items-start justify-between">
 		<div>
 			<div class="flex items-center gap-3 mb-1">
-				<a href="/accounts" class="text-gray-400 hover:text-gray-600 text-sm">← Accounts</a>
+				<a href="{base}/accounts" class="text-gray-400 hover:text-gray-600 text-sm">← Accounts</a>
 			</div>
 			<h1 class="text-2xl font-bold text-gray-900">{account.name}</h1>
 			<div class="flex items-center gap-3 mt-2">
@@ -202,7 +203,7 @@
 			</div>
 			<div class="card-body space-y-2">
 				{#each account.similarAccounts as sim}
-				<a href="/accounts/{sim.id}" class="flex items-center justify-between p-2 rounded-lg hover:bg-gray-50 transition-colors">
+				<a href="{base}/accounts/{sim.id}" class="flex items-center justify-between p-2 rounded-lg hover:bg-gray-50 transition-colors">
 					<div class="min-w-0">
 						<p class="text-sm font-medium text-gray-900 truncate">{sim.name}</p>
 						<p class="text-xs text-gray-400">{sim.city ?? ''}, {sim.state ?? ''}</p>
