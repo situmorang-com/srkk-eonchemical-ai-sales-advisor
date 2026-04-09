@@ -1,0 +1,10 @@
+RewriteEngine On
+RewriteBase /srkk-eonchemicals/
+
+# Let real files and directories resolve normally.
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Serve the SPA entrypoint for client-side routes.
+RewriteRule ^ index.html [L]
