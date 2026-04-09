@@ -1,18 +1,19 @@
 <script lang="ts">
 	import '../app.css';
 	import { page } from '$app/stores';
+	import { base } from '$app/paths';
 	import eomLogo from '$lib/assets/eon-chemicals-putra-logo.png';
 
 	const navItems = [
-		{ href: '/',           label: 'Dashboard',   icon: 'grid' },
-		{ href: '/accounts',   label: 'Accounts',    icon: 'building' },
-		{ href: '/opportunities', label: 'Opportunities', icon: 'target' },
-		{ href: '/manager',    label: 'Manager',     icon: 'bar-chart' },
-		{ href: '/copilot',    label: 'AI Copilot',  icon: 'bot' },
+		{ href: `${base}/`,              label: 'Dashboard',   icon: 'grid' },
+		{ href: `${base}/accounts`,      label: 'Accounts',    icon: 'building' },
+		{ href: `${base}/opportunities`, label: 'Opportunities', icon: 'target' },
+		{ href: `${base}/manager`,       label: 'Manager',     icon: 'bar-chart' },
+		{ href: `${base}/copilot`,       label: 'AI Copilot',  icon: 'bot' },
 	];
 
 	function isActive(href: string): boolean {
-		if (href === '/') return $page.url.pathname === '/';
+		if (href === `${base}/`) return $page.url.pathname === `${base}/` || $page.url.pathname === base;
 		return $page.url.pathname.startsWith(href);
 	}
 
