@@ -1,11 +1,4 @@
 # Cloudflare Pages configuration for AI Sales Advisor
-# Static site deployment at https://edmund.link/srkk-eonchemicals
-
 name = "srkk-eonchemical-ai-sales-advisor"
-main = "build/index.js"
+pages_build_output_dir = "build"
 compatibility_date = "2024-12-10"
-
-[env.production]
-routes = [
-  { pattern = "srkk-eonchemicals.edmund.link", zone_name = "edmund.link" }
-]
