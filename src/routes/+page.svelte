@@ -26,13 +26,37 @@
 		$opportunityStages;
 	}
 
+	function getClosingThisMonth() {
+		const now = new Date();
+		const currentMonth = now.getMonth();
+		const currentYear = now.getFullYear();
+
+		const closing = $opportunities.filter(opp => {
+			const closeDate = new Date(opp.closeDate);
+			return closeDate.getMonth() === currentMonth && closeDate.getFullYear() === currentYear;
+		});
+
+		return {
+			count: closing.length,
+			value: closing.reduce((sum, o) => sum + (o.value || 0), 0)
+		};
+	}
+
+	function getAverageDealAge() {
+		if ($opportunities.length === 0) return 0;
+		// Use stalledDays as proxy for deal age
+		// For stalled deals, this is actual days; for non-stalled, this is 0 (conservative estimate)
+		const totalDays = $opportunities.reduce((sum, o) => sum + (o.stalledDays || 0), 0);
+		return Math.round(totalDays / $opportunities.length);
+	}
+
 	$: stats = {
 		totalPipelineValue: $opportunities.reduce((sum, opp) => sum + (opp.value || 0), 0),
 		openOpportunities: $opportunities.length,
 		stalledDeals: $opportunities.filter(o => o.isStalled).length,
-		avgDealAge: Math.round($opportunities.reduce((sum, o) => sum + (o.stalledDays || 0), 0) / Math.max($opportunities.length, 1)),
-		closingThisMonth: 0,
-		closingThisMonthValue: 0,
+		avgDealAge: getAverageDealAge(),
+		closingThisMonth: getClosingThisMonth().count,
+		closingThisMonthValue: getClosingThisMonth().value,
 		winRateEstimate: 0.35
 	};
 
