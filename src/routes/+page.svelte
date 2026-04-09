@@ -1,13 +1,9 @@
 <script lang="ts">
-	import type { PageData } from './$types';
+	import { opportunities, opportunityStages, accounts } from '$lib/stores/data';
 	import StatCard from '$lib/components/ui/StatCard.svelte';
 	import OpportunityRow from '$lib/components/ui/OpportunityRow.svelte';
 	import RiskBadge from '$lib/components/ui/RiskBadge.svelte';
 	import StageProgressChart from '$lib/components/ui/StageProgressChart.svelte';
-
-	export let data: PageData;
-	$: ({ dashboard } = data);
-	$: ({ stats, priorityOpportunities, stalledDeals, recommendedActions, pipelineByStage } = dashboard);
 
 	function fmtCurrency(n: number) {
 		if (n >= 1_000_000_000) return `Rp ${(n / 1_000_000_000).toFixed(1)}M`;
@@ -21,6 +17,62 @@
 		medium: 'bg-amber-50 border-amber-200 text-amber-700',
 		low: 'bg-gray-50 border-gray-200 text-gray-600'
 	};
+
+	// Computed dashboard data from stores
+	$: {
+		$opportunities;
+		$accounts;
+		$opportunityStages;
+	}
+
+	$: stats = {
+		totalPipelineValue: $opportunities.reduce((sum, opp) => sum + (opp.value || 0), 0),
+		openOpportunities: $opportunities.length,
+		stalledDeals: $opportunities.filter(o => o.isStalled).length,
+		avgDealAge: Math.round($opportunities.reduce((sum, o) => sum + (o.stalledDays || 0), 0) / Math.max($opportunities.length, 1)),
+		closingThisMonth: 0,
+		closingThisMonthValue: 0,
+		winRateEstimate: 0.35
+	};
+
+	$: priorityOpportunities = $opportunities
+		.filter(o => !o.isStalled)
+		.slice(0, 5)
+		.map(opp => {
+			const account = $accounts.find(a => a.id === opp.accountId);
+			const stage = $opportunityStages.find(s => s.id === opp.stageId);
+			return { ...opp, accountName: account?.name || 'Unknown', stageName: stage?.name || '' };
+		});
+
+	$: stalledDeals = $opportunities
+		.filter(o => o.isStalled)
+		.map(opp => {
+			const account = $accounts.find(a => a.id === opp.accountId);
+			const stage = $opportunityStages.find(s => s.id === opp.stageId);
+			return { ...opp, accountName: account?.name || 'Unknown', stageName: stage?.name || '' };
+		});
+
+	$: recommendedActions = $opportunities
+		.slice(0, 3)
+		.map(opp => {
+			const account = $accounts.find(a => a.id === opp.accountId);
+			return {
+				opportunityId: opp.id,
+				accountName: account?.name || 'Unknown',
+				action: `Follow up on ${opp.name}`,
+				reason: opp.problemStatement?.substring(0, 60) + '...',
+				urgency: opp.isStalled ? 'high' : (opp.stalledDays || 0) > 7 ? 'medium' : 'low'
+			};
+		});
+
+	$: pipelineByStage = $opportunityStages.map(stage => {
+		const stageOpps = $opportunities.filter(o => o.stageId === stage.id);
+		return {
+			stageCode: stage.code,
+			count: stageOpps.length,
+			totalValue: stageOpps.reduce((sum, o) => sum + (o.value || 0), 0)
+		};
+	});
 </script>
 
 <svelte:head><title>Dashboard — AI Sales Advisor</title></svelte:head>

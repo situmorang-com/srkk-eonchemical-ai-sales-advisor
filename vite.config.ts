@@ -3,12 +3,5 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
 	plugins: [sveltekit()],
-	optimizeDeps: {
-		exclude: ['better-sqlite3']
-	},
-	build: {
-		rollupOptions: {
-			external: ['better-sqlite3']
-		}
-	}
+	base: '/srkk-eonchemicals/'
 });

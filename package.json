@@ -16,9 +16,9 @@
   },
   "devDependencies": {
     "@sveltejs/adapter-node": "^5.2.9",
+    "@sveltejs/adapter-static": "^3.0.10",
     "@sveltejs/kit": "^2.16.0",
     "@sveltejs/vite-plugin-svelte": "^5.0.3",
-    "@types/better-sqlite3": "^7.6.13",
     "@types/node": "^25.5.2",
     "autoprefixer": "^10.4.20",
     "drizzle-kit": "^0.30.4",
@@ -31,8 +31,6 @@
     "vite": "^6.0.7"
   },
   "dependencies": {
-    "better-sqlite3": "^11.7.0",
-    "drizzle-orm": "^0.39.3",
     "lucide-svelte": "^0.469.0"
   },
   "type": "module"
