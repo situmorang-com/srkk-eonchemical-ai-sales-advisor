@@ -12,6 +12,9 @@ const config = {
 			precompress: false,
 			strict: false
 		}),
+		paths: {
+			base: '/srkk-eonchemicals'
+		},
 		alias: {
 			$lib: './src/lib',
 			$types: './src/lib/types'
