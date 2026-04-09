@@ -40,7 +40,7 @@
 	<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
 		<div>
 			<div class="flex items-center gap-2 mb-2 text-sm text-gray-400">
-				<a href="/opportunities" class="hover:text-gray-600">← Opportunities</a>
+				<a href="{base}/opportunities" class="hover:text-gray-600">← Opportunities</a>
 				<span>·</span>
 				<a href="{base}/accounts/{opp.accountId}" class="hover:text-brand-600">{opp.accountName}</a>
 			</div>
@@ -53,7 +53,7 @@
 				<span class="text-sm text-gray-500">Close: {opp.closeDate}</span>
 			</div>
 		</div>
-		<a href="/copilot?context=opportunity&id={opp.id}" class="btn-primary text-sm flex-shrink-0">
+		<a href="{base}/copilot?context=opportunity&id={opp.id}" class="btn-primary text-sm flex-shrink-0">
 			Ask AI Copilot
 		</a>
 	</div>

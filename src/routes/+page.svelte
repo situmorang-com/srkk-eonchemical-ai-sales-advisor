@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import { opportunities, opportunityStages, accounts } from '$lib/stores/data';
 	import StatCard from '$lib/components/ui/StatCard.svelte';
 	import OpportunityRow from '$lib/components/ui/OpportunityRow.svelte';
@@ -121,7 +122,7 @@
 		<div class="xl:col-span-2 card">
 			<div class="card-header flex items-center justify-between">
 				<h2 class="text-sm font-semibold text-gray-900">Priority Opportunities</h2>
-				<a href="/opportunities" class="text-xs text-brand-600 hover:text-brand-700 font-medium">View all</a>
+				<a href="{base}/opportunities" class="text-xs text-brand-600 hover:text-brand-700 font-medium">View all</a>
 			</div>
 			<div>
 				{#each priorityOpportunities as opp}
@@ -137,7 +138,7 @@
 			</div>
 			<div class="card-body space-y-3">
 				{#each recommendedActions as action}
-					<a href="/opportunities/{action.opportunityId}" class="block rounded-lg border p-3 hover:shadow-sm transition-shadow {urgencyColor[action.urgency]}">
+					<a href="{base}/opportunities/{action.opportunityId}" class="block rounded-lg border p-3 hover:shadow-sm transition-shadow {urgencyColor[action.urgency]}">
 						<div class="flex items-start justify-between gap-2 mb-1">
 							<p class="text-xs font-semibold truncate">{action.accountName}</p>
 							<span class="text-[10px] font-bold uppercase flex-shrink-0 opacity-70">{action.urgency}</span>
@@ -176,7 +177,7 @@
 					{#each stalledDeals as opp}
 					<tr class="border-b border-gray-50 hover:bg-gray-50">
 						<td class="px-6 py-3">
-							<a href="/opportunities/{opp.id}" class="font-medium text-brand-700 hover:underline">{opp.name}</a>
+							<a href="{base}/opportunities/{opp.id}" class="font-medium text-brand-700 hover:underline">{opp.name}</a>
 						</td>
 						<td class="px-6 py-3 text-gray-500">{opp.accountName}</td>
 						<td class="px-6 py-3 text-gray-500">{opp.stageName}</td>

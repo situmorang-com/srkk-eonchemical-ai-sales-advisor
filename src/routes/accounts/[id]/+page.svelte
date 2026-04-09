@@ -39,7 +39,7 @@
 				<span class="text-sm text-gray-400">{account.city ?? ''}{account.state ? `, ${account.state}` : ''} {account.country}</span>
 			</div>
 		</div>
-		<a href="/copilot?context=account&id={account.id}" class="btn-primary text-sm">
+		<a href="{base}/copilot?context=account&id={account.id}" class="btn-primary text-sm">
 			Ask AI Copilot
 		</a>
 	</div>
