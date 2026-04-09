@@ -1,4 +1,9 @@
-# Cloudflare Pages configuration for AI Sales Advisor
+# Cloudflare Worker + Assets deployment for AI Sales Advisor
+# Serves the app at edmund.link/srkk-eonchemicals
 name = "srkk-eonchemical-ai-sales-advisor"
-pages_build_output_dir = "build"
 compatibility_date = "2024-12-10"
+route = "edmund.link/srkk-eonchemicals*"
+
+[assets]
+directory = "./build"
+not_found_handling = "single-page-application"

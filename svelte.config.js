@@ -6,8 +6,8 @@ const config = {
 	preprocess: vitePreprocess(),
 	kit: {
 		adapter: adapter({
-			pages: 'build',
-			assets: 'build',
+			pages: 'build/srkk-eonchemicals',
+			assets: 'build/srkk-eonchemicals',
 			fallback: 'index.html',
 			precompress: false,
 			strict: false
