@@ -17,10 +17,18 @@
 
 	const stageColors: Record<string, string> = {
 		PROSPECT: 'bg-gray-100 text-gray-600',
-		QUALIFY: 'bg-blue-100 text-blue-700',
-		PROPOSE: 'bg-amber-100 text-amber-700',
-		NEGOTIATE: 'bg-orange-100 text-orange-700',
-		CLOSE: 'bg-green-100 text-green-700'
+		QUAL: 'bg-blue-100 text-blue-700',
+		PROPOSAL: 'bg-amber-100 text-amber-700',
+		NEGOTIATION: 'bg-orange-100 text-orange-700',
+		WON: 'bg-green-100 text-green-700'
+	};
+
+	const stageLabels: Record<string, string> = {
+		PROSPECT: 'Prospect',
+		QUAL: 'Qualification',
+		PROPOSAL: 'Proposal',
+		NEGOTIATION: 'Negotiation',
+		WON: 'Closed Won'
 	};
 
 	const activityIcons: Record<string, string> = {
@@ -29,7 +37,7 @@
 	};
 
 	// Stage progress
-	const stageOrder = ['PROSPECT', 'QUALIFY', 'PROPOSE', 'NEGOTIATE', 'CLOSE'];
+	const stageOrder = ['PROSPECT', 'QUAL', 'PROPOSAL', 'NEGOTIATION', 'WON'];
 	$: currentStageIndex = stageOrder.indexOf(opp.stageCode);
 </script>
 
@@ -72,7 +80,7 @@
 							<div class="flex-1 h-0.5 {i < currentStageIndex ? 'bg-brand-500' : 'bg-gray-200'}"></div>
 						{/if}
 					</div>
-					<span class="text-xs mt-1.5 {i === currentStageIndex ? 'text-brand-700 font-semibold' : 'text-gray-400'}">{stage.charAt(0) + stage.slice(1).toLowerCase()}</span>
+					<span class="text-xs mt-1.5 {i === currentStageIndex ? 'text-brand-700 font-semibold' : 'text-gray-400'}">{stageLabels[stage] ?? stage}</span>
 				</div>
 			</div>
 		{/each}

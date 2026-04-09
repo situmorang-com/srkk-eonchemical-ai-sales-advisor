@@ -1,6 +1,14 @@
 import { accounts, industries, users, opportunities, opportunityStages, products, productFamilies, notes, activities, accountProductHistory } from '$lib/data';
 import { error } from '@sveltejs/kit';
 
+const stageProbabilityByCode: Record<string, number> = {
+	PROSPECT: 0.15,
+	QUAL: 0.35,
+	PROPOSAL: 0.6,
+	NEGOTIATION: 0.8,
+	WON: 1
+};
+
 export function load({ params }: { params: { id: string } }) {
 	const account = accounts.find((a) => a.id === params.id);
 	if (!account) throw error(404, 'Account not found');
@@ -24,7 +32,7 @@ export function load({ params }: { params: { id: string } }) {
 			industryName: industry?.name ?? '',
 			stageName: stage?.name ?? '',
 			stageCode: stage?.code ?? '',
-			stageProbability: 0,
+			stageProbability: stageProbabilityByCode[stage?.code ?? ''] ?? 0,
 			stageOrder: stage?.sequence ?? 0,
 			value: o.value,
 			currency: o.currency,

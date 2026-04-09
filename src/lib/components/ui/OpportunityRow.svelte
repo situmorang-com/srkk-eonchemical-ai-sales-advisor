@@ -15,10 +15,10 @@
 
 	const stageColors: Record<string, string> = {
 		PROSPECT:  'bg-gray-100 text-gray-600',
-		QUALIFY:   'bg-blue-100 text-blue-700',
-		PROPOSE:   'bg-amber-100 text-amber-700',
-		NEGOTIATE: 'bg-orange-100 text-orange-700',
-		CLOSE:     'bg-green-100 text-green-700'
+		QUAL:      'bg-blue-100 text-blue-700',
+		PROPOSAL:  'bg-amber-100 text-amber-700',
+		NEGOTIATION:'bg-orange-100 text-orange-700',
+		WON:       'bg-green-100 text-green-700'
 	};
 </script>
 

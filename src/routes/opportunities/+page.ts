@@ -1,5 +1,13 @@
 import { opportunities, accounts, industries, opportunityStages, users, products } from '$lib/data';
 
+const stageProbabilityByCode: Record<string, number> = {
+	PROSPECT: 0.15,
+	QUAL: 0.35,
+	PROPOSAL: 0.6,
+	NEGOTIATION: 0.8,
+	WON: 1
+};
+
 export function load() {
 	return {
 		opportunities: opportunities.map((o) => {
@@ -17,7 +25,7 @@ export function load() {
 				industryName: industry?.name ?? '',
 				stageName: stage?.name ?? '',
 				stageCode: stage?.code ?? '',
-				stageProbability: 0,
+				stageProbability: stageProbabilityByCode[stage?.code ?? ''] ?? 0,
 				stageOrder: stage?.sequence ?? 0,
 				value: o.value,
 				currency: o.currency,
