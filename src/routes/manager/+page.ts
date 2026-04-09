@@ -1,4 +1,4 @@
-import { users, accounts, opportunities, opportunityStages } from '$lib/data';
+import { users, accounts, industries, opportunities, opportunityStages } from '$lib/data';
 
 export function load() {
 	const teamMembers = users
@@ -12,8 +12,8 @@ export function load() {
 				region: u.region,
 				openOpportunities: userOpps.length,
 				pipelineValue: userOpps.reduce((s, o) => s + (o.value || 0), 0),
-				stalledCount: stalled.length,
-				activitiesPerWeek: Math.floor(Math.random() * 8) + 3
+				stalledDeals: stalled.length,
+				activitiesThisWeek: Math.floor(Math.random() * 8) + 3
 			};
 		});
 
@@ -22,14 +22,21 @@ export function load() {
 		.map((o) => {
 			const account = accounts.find((a) => a.id === o.accountId);
 			const assignedUser = users.find((u) => u.id === o.assignedUserId);
+			const stage = opportunityStages.find((s) => s.id === o.stageId);
 			return {
 				id: o.id,
+				opportunityId: o.id,
 				opportunityName: o.name,
 				accountName: account?.name ?? '',
-				repName: assignedUser?.name ?? '',
+				assignedTo: assignedUser?.name ?? '',
 				stalledDays: o.stalledDays,
 				value: o.value,
-				riskLevel: o.riskLevel
+				riskLevel: o.riskLevel,
+				suggestedAction: stage?.code === 'PROPOSAL'
+					? 'Follow up on proposal — schedule a review meeting this week.'
+					: stage?.code === 'NEGOTIATION'
+						? 'Escalate pricing discussion and confirm decision timeline.'
+						: 'Re-engage the stakeholder with a new value proposition or site visit.'
 			};
 		});
 
@@ -39,7 +46,7 @@ export function load() {
 			stageCode: stage.code,
 			stageName: stage.name,
 			count: stageOpps.length,
-			value: stageOpps.reduce((s, o) => s + (o.value || 0), 0)
+			totalValue: stageOpps.reduce((s, o) => s + (o.value || 0), 0)
 		};
 	});
 
@@ -50,10 +57,13 @@ export function load() {
 	};
 
 	const topAccounts = accounts.slice(0, 5).map((a) => {
+		const industry = industries.find((i) => i.id === a.industryId);
 		const acctOpps = opportunities.filter((o) => o.accountId === a.id);
 		return {
 			id: a.id,
 			name: a.name,
+			industryName: industry?.name ?? '',
+			tier: a.tier,
 			openOpportunities: acctOpps.length,
 			pipelineValue: acctOpps.reduce((s, o) => s + (o.value || 0), 0)
 		};
