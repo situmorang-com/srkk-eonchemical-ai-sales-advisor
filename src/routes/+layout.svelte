@@ -1,6 +1,7 @@
 <script lang="ts">
 	import '../app.css';
 	import { page } from '$app/stores';
+	import eomLogo from '$lib/assets/eon-chemicals-putra-logo.png';
 
 	const navItems = [
 		{ href: '/',           label: 'Dashboard',   icon: 'grid' },
@@ -34,18 +35,8 @@
 	<!-- Desktop Sidebar (lg and above) -->
 	<aside class="hidden lg:flex w-60 bg-white border-r border-gray-200 flex-col flex-shrink-0">
 		<!-- Logo -->
-		<div class="px-6 py-5 border-b border-gray-100">
-			<div class="flex items-center gap-3">
-				<div class="w-8 h-8 rounded-lg bg-brand-600 flex items-center justify-center">
-					<svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-					</svg>
-				</div>
-				<div>
-					<p class="text-sm font-bold text-gray-900 leading-tight">AI Sales Advisor</p>
-					<p class="text-xs text-gray-400">PT Eonchemicals Putra</p>
-				</div>
-			</div>
+		<div class="px-6 py-4 border-b border-gray-100">
+			<img src={eomLogo} alt="EON Chemical Solution" class="h-12 w-auto" />
 		</div>
 
 		<!-- Nav -->
@@ -90,16 +81,8 @@
 
 	<!-- Mobile top bar -->
 	<div class="lg:hidden fixed top-0 left-0 right-0 z-40 bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between">
-		<div class="flex items-center gap-3">
-			<div class="w-7 h-7 rounded-lg bg-brand-600 flex items-center justify-center">
-				<svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-				</svg>
-			</div>
-			<div>
-				<p class="text-sm font-bold text-gray-900 leading-tight">AI Sales Advisor</p>
-				<p class="text-[10px] text-gray-400">PT Eonchemicals Putra</p>
-			</div>
+		<div class="flex items-center gap-2">
+			<img src={eomLogo} alt="EON Chemical Solution" class="h-8 w-auto" />
 		</div>
 		<button
 			on:click={() => mobileMenuOpen = !mobileMenuOpen}
@@ -125,18 +108,8 @@
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<!-- svelte-ignore a11y-no-static-element-interactions -->
 			<div class="relative w-64 bg-white flex flex-col shadow-xl" on:click|stopPropagation>
-				<div class="px-6 py-5 border-b border-gray-100">
-					<div class="flex items-center gap-3">
-						<div class="w-8 h-8 rounded-lg bg-brand-600 flex items-center justify-center">
-							<svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-							</svg>
-						</div>
-						<div>
-							<p class="text-sm font-bold text-gray-900 leading-tight">AI Sales Advisor</p>
-							<p class="text-xs text-gray-400">PT Eonchemicals Putra</p>
-						</div>
-					</div>
+				<div class="px-6 py-4 border-b border-gray-100">
+					<img src={eomLogo} alt="EON Chemical Solution" class="h-12 w-auto" />
 				</div>
 				<nav class="flex-1 px-3 py-4 space-y-0.5">
 					{#each navItems as item}
